@@ -385,7 +385,7 @@ export function readInputFile(
     setEditMode(false);
   } else {
     // ファイル読み込みに失敗した場合はエラー ボックスを表示します。
-    window.apiData.showErrorBox(
+    platform.showErrorBox(
       'エラー',
       `ファイル読み込み中に以下のエラーが発生しました。\n\n` +
         `${errorMessages[0]}\n` +

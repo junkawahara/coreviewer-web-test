@@ -24,6 +24,7 @@ import {
   convertNodePositionDataToString,
 } from '../functions/GraphDataFunctions';
 import { usePlatform } from '../platform/PlatformContext';
+import { sample1 } from '../platform/sampleData';
 
 // 入力用コンポーネントのプロパティを表す型です。
 type InputsProp = {
@@ -151,6 +152,24 @@ export const Inputs = (prop: InputsProp) => {
     colorNumberMap,
   ]);
 
+  // [sample 1] クリック時のハンドラを作成します。
+  const handleLoadSample1 = useCallback(() => {
+    readInputFile(
+      platform,
+      'sample1',
+      sample1,
+      elementData,
+      problemInfo,
+      customNodePositionMap,
+      displayModeMap,
+      setColorNumberMap,
+      setElementData,
+      setNodePositions,
+      setLayout,
+      setEditMode,
+    );
+  }, [problemInfo, elementData]);
+
   // [Cancel] クリック時のハンドラを作成します。
   const handleCancelSolving = () => {
     // ソルバーの実行をキャンセルするためのイベントを発生させます。
@@ -241,6 +260,14 @@ export const Inputs = (prop: InputsProp) => {
         </Button>
         {/* ソルバーの実行/キャンセルを行うボタンです。 */}
         {solveCancelButton}
+        {/* サンプル データ読み込みボタンです。 */}
+        <Button
+          variant="outlined"
+          size="small"
+          onClick={handleLoadSample1}
+          css={sampleButtonCss(isSolverRunning)}>
+          sample 1
+        </Button>
       </div>
       <div css={solverLabelCss}>ソルバー : </div>
       <div css={solverNameCss}>{appSettings.solver}</div>
@@ -281,6 +308,12 @@ const openButtonCss = (disabled: boolean) => css`
 // Cancel ボタンのスタイル定義です。
 const cancelButtonCss = css`
   pointer-events: auto;
+`;
+
+// サンプル データ読み込みボタンのスタイル定義です。
+const sampleButtonCss = (disabled: boolean) => css`
+  opacity: ${disabled ? 0.5 : 1};
+  pointer-events: ${disabled ? 'none' : 'auto'};
 `;
 
 // ソルバー ラベルのスタイル定義です。
