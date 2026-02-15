@@ -17,6 +17,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist-web'),
     filename: 'bundle.js',
+    publicPath: './',
   },
   // ファイルタイプ毎の処理を記述します。
   module: {
