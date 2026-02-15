@@ -43,7 +43,7 @@ cytoscape.use(edgehandles);
 cytoscape.use(coseBilkent);
 
 // デフォルトのズーム値です。
-const defaultZoomFactor = 1.0;
+const defaultZoomFactor = 0.7;
 
 // メイン ウインドウのプロパティを表す型です。
 type MainWindowProp = {
