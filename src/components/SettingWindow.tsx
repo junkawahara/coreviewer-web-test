@@ -8,9 +8,18 @@ import Select from '@mui/material/Select';
 
 import { Settings, getDefaultSettings } from '../Settings';
 import { ColorSelectionBox } from './ColorSelectionBox';
+import { usePlatform } from '../platform/PlatformContext';
+
+// 設定ウインドウのプロパティを表す型です。
+type SettingWindowProp = {
+  // モーダルを閉じるためのコールバックです（Web 版用）。
+  onClose?: () => void;
+};
 
 // 設定ウインドウを表す関数コンポーネントを定義します。
-export const SettingWindow = () => {
+export const SettingWindow = (prop?: SettingWindowProp) => {
+  // プラットフォーム API を取得します。
+  const platform = usePlatform();
   // ソルバー名リストを保持する状態変数を取得します。
   const [solvers, setSolvers] = useState<string[]>([]);
   // ソルバーの設定値を保持する状態変数を取得します。
@@ -54,7 +63,7 @@ export const SettingWindow = () => {
 
   // ウィンドウ表示時にメイン プロセスから設定を受け取るハンドラを設定します。
   useEffect(() => {
-    window.apiData.onSettingsSend(
+    platform.onSettingsSend(
       (
         event: any,
         setting: Settings,
@@ -204,9 +213,13 @@ export const SettingWindow = () => {
       displayEdgeLabel,
     };
     // 作成した設定オブジェクトをメイン プロセスに送信します。
-    window.apiData.saveSetting(newSetting);
+    platform.saveSetting(newSetting);
     // ウィンドウを閉じます。
-    window.close();
+    if (prop?.onClose) {
+      prop.onClose();
+    } else {
+      window.close();
+    }
   }, [
     solver,
     nodeRadius,
@@ -419,7 +432,11 @@ export const SettingWindow = () => {
           variant="outlined"
           css={cancelButtonCss}
           onClick={() => {
-            window.close();
+            if (prop?.onClose) {
+              prop.onClose();
+            } else {
+              window.close();
+            }
           }}>
           Cancel
         </Button>

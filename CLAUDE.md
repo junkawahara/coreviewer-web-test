@@ -64,3 +64,9 @@ Cytoscape.jsベースで以下のプラグインを使用:
 - インターフェース命名: 先頭に`I`を付ける（例: `ISettings`）
 - コードコメントは日本語
 - TypeScript strict mode有効、ターゲットES2020、モジュールCommonJS
+
+## Git Workflow
+
+- **Commit frequently**: Make small, incremental commits after completing each feature or fix
+- Do not batch multiple unrelated changes into a single commit
+- **Auto-commit after implementation**: When an implementation task is completed and tests pass, automatically commit the changes without waiting for user instruction

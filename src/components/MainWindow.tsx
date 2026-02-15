@@ -37,6 +37,7 @@ import {
   convertElementDataToString,
   convertElementDataToStringForEdgeType,
 } from '../functions/GraphDataFunctions';
+import { usePlatform } from '../platform/PlatformContext';
 
 cytoscape.use(edgehandles);
 cytoscape.use(coseBilkent);
@@ -44,8 +45,16 @@ cytoscape.use(coseBilkent);
 // デフォルトのズーム値です。
 const defaultZoomFactor = 1.0;
 
+// メイン ウインドウのプロパティを表す型です。
+type MainWindowProp = {
+  // 設定モーダルを表示するためのコールバックです（Web 版用）。
+  onShowSettings?: () => void;
+};
+
 // メイン ウインドウを表す関数コンポーネントを定義します。
-export const MainWindow = () => {
+export const MainWindow = (_prop: MainWindowProp = {}) => {
+  // プラットフォーム API を取得します。
+  const platform = usePlatform();
   // ズーム値とそれを操作する関数を取得します。
   const [zoomFactor, setZoomFactor] = React.useState(1.0);
   // 編集モード フラグとそれを操作する関数を取得します。
@@ -99,12 +108,12 @@ export const MainWindow = () => {
   // メイン プロセスからのイベントに対するハンドラを設定します。
   useEffect(() => {
     // 問題データを受け取るハンドラを設定します。
-    window.apiData.onProblemInfoSend((event: any, problemInfoMap: any) => {
+    platform.onProblemInfoSend((event: any, problemInfoMap: any) => {
       setProblemInfoMap(problemInfoMap as ProblemInfoMap);
     });
 
     // アプリケーションの設定を受け取るハンドラを設定します。
-    window.apiData.onSettingsSend(
+    platform.onSettingsSend(
       (
         event: any,
         settings: Settings,
@@ -161,8 +170,8 @@ export const MainWindow = () => {
   useEffect(() => {
     // メイン プロセスからの保存用データに対応するハンドラを設定します。
     // 既に設定されているハンドラを削除します。
-    window.apiData.removeHandler('require-output-data');
-    window.apiData.onOutputDataRequired((event: any, outputType: string) => {
+    platform.removeHandler('require-output-data');
+    platform.onOutputDataRequired((event: any, outputType: string) => {
       let dataStrings: string[] = [];
       let curNodePositions: NodePosition[] | null = null;
       // 現在の表示モードを取得します。
@@ -213,7 +222,7 @@ export const MainWindow = () => {
           }
           break;
       }
-      window.apiData.saveData(outputData, outputType);
+      platform.saveData(outputData, outputType);
     });
   }, [problemInfo, displayModeMap, elementData, nodePositions]);
 
@@ -221,8 +230,8 @@ export const MainWindow = () => {
   useEffect(() => {
     // メイン プロセスからの保存用データに対応するハンドラを設定します。
     // 既に設定されているハンドラを削除します。
-    window.apiData.removeHandler('require-output-image');
-    window.apiData.onOutputImageRequired((event: any, outputType: string) => {
+    platform.removeHandler('require-output-image');
+    platform.onOutputImageRequired((event: any, outputType: string) => {
       const graphImages: string[] = [];
 
       if (outputType === 'all' || outputType === 'basegraph') {
@@ -249,7 +258,7 @@ export const MainWindow = () => {
         targetGraphImage = targetGraphImage ? targetGraphImage : '';
         graphImages.push(targetGraphImage);
       }
-      window.apiData.saveImage(graphImages, outputType);
+      platform.saveImage(graphImages, outputType);
     });
   }, [
     problemInfo,
@@ -379,12 +388,17 @@ export const MainWindow = () => {
     }
   }, [nodePositions]);
 
-  // ファイルのドラッグ アンド どっぷ時のハンドラを作成します。
-  const onDrop = useCallback(acceptedFiles => {
-    if (acceptedFiles.length > 0) {
-      setDroppedFile(acceptedFiles[0].path);
-    }
-  }, []);
+  // ファイルのドラッグ アンド ドロップ時のハンドラを作成します。
+  const onDrop = useCallback(
+    acceptedFiles => {
+      if (acceptedFiles.length > 0) {
+        const file = acceptedFiles[0];
+        platform.storeDroppedFile?.(file);
+        setDroppedFile(file.path || file.name);
+      }
+    },
+    [platform],
+  );
   // ドラッグ アンド ドロップに対応するための関数を取得します。
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,

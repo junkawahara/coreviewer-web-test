@@ -1,5 +1,6 @@
 node_modules/
 dist/
+dist-web/
 yarn.lock
 .claude/
 thirdparty_notices.txt

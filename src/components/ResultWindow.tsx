@@ -18,9 +18,12 @@ import {
   parseNodePositionData,
 } from '../functions/GraphDataFunctions';
 import { appendNodeData } from '../functions/GraphFunctions';
+import { usePlatform } from '../platform/PlatformContext';
 
 // 出力結果ウインドウを表す関数コンポーネントを定義します。
 export const ResultWindow = () => {
+  // プラットフォーム API を取得します。
+  const platform = usePlatform();
   // グラフの要素データを保持する状態変数を取得します
   const [elementData, setElementData] = useState<ElementDefinition[]>([]);
   // ノードの位置を保持する状態変数を取得します
@@ -42,7 +45,7 @@ export const ResultWindow = () => {
 
   // 解答データ受け取り時の処理を設定します。
   useLayoutEffect(() => {
-    window.apiData.onDataSend(
+    platform.onDataSend(
       (
         event: any,
         graphData: string,

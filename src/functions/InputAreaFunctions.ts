@@ -14,6 +14,7 @@ import { NodePosition, NodePositionMap } from '../components/NodePosition';
 import { DisplayModeMap } from '../components/DisplayModeMap';
 import { parseGraphData } from '../functions/GraphDataFunctions';
 import { ColorNumberMap } from '../components/ColorNumberMap';
+import { PlatformAPI } from '../platform/PlatformAPI';
 
 /**
  * グラフ データに開始、目標フラグを設定します。
@@ -245,6 +246,7 @@ export function getNodePositionDataForElementData(
 
 /**
  * 組合せ遷移問題の入力データを読み込みます。
+ * @param {PlatformAPI} platform プラットフォーム API
  * @param {string} path
  * @param {string} data
  * @param {ElementDefinition[]} elementData 現在のグラフ データ
@@ -258,6 +260,7 @@ export function getNodePositionDataForElementData(
  * @param { Dispatch<SetStateAction<any>>} setEditMode 編集モードの有効/無効を設定する関数です。
  */
 export function readInputFile(
+  platform: PlatformAPI,
   path: string,
   data: string,
   elementData: ElementDefinition[],
@@ -334,7 +337,7 @@ export function readInputFile(
           }
           // データが読み込まれていない場合はエラー メッセージを表示します。
         } else {
-          window.apiData.showErrorBox(
+          platform.showErrorBox(
             'エラー',
             `ファイル読み込み中に以下のエラーが発生しました。\n\n` +
               `開始、目標データの読み込みに失敗しました。\n開始、目標データを読み込む前にグラフ データを読み込んでください。\n` +

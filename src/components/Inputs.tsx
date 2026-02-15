@@ -23,6 +23,7 @@ import {
   convertElementDataToStringForEdgeType,
   convertNodePositionDataToString,
 } from '../functions/GraphDataFunctions';
+import { usePlatform } from '../platform/PlatformContext';
 
 // 入力用コンポーネントのプロパティを表す型です。
 type InputsProp = {
@@ -37,6 +38,8 @@ type InputsProp = {
 // 入力用コンポーネントです。
 export const Inputs = (prop: InputsProp) => {
   const { setLayout, disabled, setEditMode } = prop;
+  // プラットフォーム API を取得します。
+  const platform = usePlatform();
   // コンテキスト データとデータ設定用関数を取得します。
   const {
     appSettings,
@@ -95,9 +98,10 @@ export const Inputs = (prop: InputsProp) => {
   // [Open] クリック時のイベント ハンドラを作成します。
   // このイベント ハンドラ内では、ファイル ダイアログを用いて入力ファイルを読み込みます。
   const handleGraphOpen = useCallback(() => {
-    window.apiData.openFileDialog().then(([path, data]) => {
+    platform.openFileDialog().then(([path, data]) => {
       if (!data) return;
       readInputFile(
+        platform,
         path,
         data,
         elementData,
@@ -115,7 +119,7 @@ export const Inputs = (prop: InputsProp) => {
 
   // ソルバー実行完了時の処理です。
   useEffect(() => {
-    window.apiData.onSolverFinished(() => {
+    platform.onSolverFinished(() => {
       setSolverRunning(false);
     });
   }, []);
@@ -130,7 +134,7 @@ export const Inputs = (prop: InputsProp) => {
       : -1;
     setSolverRunning(true);
     // ソルバーを実行するためのイベントを発生させます。
-    window.apiData.runSolver(
+    platform.runSolver(
       graphData,
       stData,
       convertNodePositionDataToString(nodePositions),
@@ -150,7 +154,7 @@ export const Inputs = (prop: InputsProp) => {
   // [Cancel] クリック時のハンドラを作成します。
   const handleCancelSolving = () => {
     // ソルバーの実行をキャンセルするためのイベントを発生させます。
-    window.apiData.cancelSolver();
+    platform.cancelSolver();
   };
 
   const divRef = useRef<HTMLDivElement | null>(null);
@@ -193,8 +197,9 @@ export const Inputs = (prop: InputsProp) => {
   useLayoutEffect(() => {
     if (droppedFile !== '') {
       // ファイルを読み込みます。
-      window.apiData.readFile(droppedFile).then(data => {
+      platform.readFile(droppedFile).then(data => {
         readInputFile(
+          platform,
           droppedFile,
           data,
           elementData,
