@@ -17,6 +17,7 @@ import TextField from '@mui/material/TextField';
 
 import { GraphDataContext } from './GraphDataProvider';
 import { NodePosition } from './NodePosition';
+import { layouts } from './Layouts';
 import { readInputFile } from '../functions/InputAreaFunctions';
 import {
   convertElementDataToString,
@@ -168,6 +169,8 @@ export const Inputs = (prop: InputsProp) => {
       setLayout,
       setEditMode,
     );
+    // サンプル データ読み込み後に Cose レイアウトを適用します。
+    setLayout(layouts.cose);
   }, [problemInfo, elementData]);
 
   // [Cancel] クリック時のハンドラを作成します。
