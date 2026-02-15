@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config>
+  <solver>IDA*（内蔵）</solver>
+  <nodeRadius>50</nodeRadius>
+  <nodeBorderWidth>5</nodeBorderWidth>
+  <normalNodeColor>Gray</normalNodeColor>
+  <startNodeColor>Orange</startNodeColor>
+  <targetNodeColor>Cyan</targetNodeColor>
+  <answerNodeColor>White</answerNodeColor>
+  <nodeBorderColor>Black</nodeBorderColor>
+  <displayNodeLabel>true</displayNodeLabel>
+  <edgeWidth>7</edgeWidth>
+  <normalEdgeColor>Gray</normalEdgeColor>
+  <startEdgeColor>Orange</startEdgeColor>
+  <targetEdgeColor>Cyan</targetEdgeColor>
+  <answerEdgeColor>Red</answerEdgeColor>
+  <displayEdgeLabel>true</displayEdgeLabel>
+</config>

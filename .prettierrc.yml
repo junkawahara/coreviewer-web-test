@@ -1,0 +1,11 @@
+printWidth: 80 # 行の文字数を"80"文字に制限します。
+tabWidth: 2 # インデント幅をスペース"2" 個にします。
+semi: true # 文末のセミコロンを強制します。
+singleQuote: true # 文字列リテラルのシングルクォーテーションとします。
+quoteProps: as-needed # オブジェクトリテラルのプロパティ名のクォーテーションは "必要なときのみ" とします。
+jsxSingleQuote: false # JSX のプロパティの値は、ダブルクォーテーションとします。
+trailingComma: all # オブジェクトリテラルなどの最後のカンマを強制します。
+bracketSpacing: true # {} のカッコに隣接するスペースをいれます。
+jsxBracketSameLine: true # JSX の後ろの '>' を同じ行にします。
+arrowParens: avoid # Arrow 関数の引数のカッコは必要な場合のみつけるようにします。
+endOfLine: lf # 改行コードを "lf" にします。

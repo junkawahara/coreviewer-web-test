@@ -1,0 +1,6 @@
+Vertex-Mode1 vertex --indset --st
+Edge-Mode1 edge --forest --st
+Vertex-Mode2 vertex --forest --st foo
+Edge-Mode2 edge --forest --st bar
+Vertex-Color-Mode1 vcolor
+Edge-Color-Mode2 ecolor

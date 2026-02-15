@@ -1,0 +1,3 @@
+solverA C:/solver/solver_a.exe paramA
+solverB C:/solver/solver_b.exe paramB1 paramB2
+solverA C:/solver/solver_b.exe

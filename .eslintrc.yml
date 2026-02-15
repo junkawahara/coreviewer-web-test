@@ -1,0 +1,42 @@
+env:
+  browser: true
+  es2021: true
+extends:
+  - 'plugin:react/recommended'
+  - google
+  - 'plugin:@typescript-eslint/recommended' # <-- TypeScript推奨ルールを追加します。
+  - prettier # 上の定義の整形に関するルールを無効化します。
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+plugins:
+  - react
+  - '@typescript-eslint'
+  - prettier # eslint-plugin-prettier を追加します。
+rules: {
+  # 関数の複雑さを 70 以下にします。
+  complexity: ['error', 70],
+  # React のプロパティの型チェックを省略します (TypeScript でチェックされるため)。
+  react/prop-types: off,
+  # インターフェースの先頭文字を "I" にします。
+  '@typescript-eslint/naming-convention': [
+    'error',
+    {
+      'selector': 'interface',
+      'format': ['PascalCase'],
+      'custom': {
+        'regex': '^I[A-Z]',
+        'match': true
+      }
+    }
+  ],
+  # prettier のチェックでErrorとするための設定です。。
+  prettier/prettier: ['error'],
+    '@typescript-eslint/no-explicit-any': off
+}
