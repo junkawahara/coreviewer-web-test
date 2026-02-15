@@ -4,6 +4,8 @@
 
 グラフ上の組合せ遷移問題を解くための GUI ツールです。Electron デスクトップアプリとブラウザ版の両方に対応しています。
 
+**[Web デモを試す](https://junkawahara.github.io/coreviewer-web-test/)**
+
 ## 機能
 
 - Cytoscape.js によるインタラクティブなグラフ編集（ノード・エッジの追加/削除、ドラッグ&ドロップ）

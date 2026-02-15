@@ -4,6 +4,8 @@
 
 A GUI tool for solving combinatorial reconfiguration problems on graphs. Supports both an Electron desktop app and a browser-based web app.
 
+**[Try the Web Demo](https://junkawahara.github.io/coreviewer-web-test/)**
+
 ## Features
 
 - Interactive graph editing with Cytoscape.js (add/remove nodes and edges, drag-and-drop layout)
