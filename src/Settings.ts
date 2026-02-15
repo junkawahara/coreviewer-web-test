@@ -57,6 +57,6 @@ export function getDefaultSettings(): Settings {
     startEdgeColor: 'Orange',
     targetEdgeColor: 'Cyan',
     answerEdgeColor: 'Red',
-    displayEdgeLabel: true,
+    displayEdgeLabel: false,
   };
 }

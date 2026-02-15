@@ -542,7 +542,7 @@ export function updateNodeAndEdgeId(
     const newData = cloneElement(curNode);
     if (curNode.data.id !== undefined) {
       newData.data.id = newNodeIdMap[curNode.data.id];
-      newData.data.label = `Node${newData.data.id}`;
+      newData.data.label = `${newData.data.id}`;
     }
     newElements.push(newData);
   }
@@ -619,7 +619,7 @@ export function appendNodeData(
       elements.push({
         data: {
           id: nodePosition.id,
-          label: `Node${nodePosition.id}`,
+          label: `${nodePosition.id}`,
           type: 'node',
           isstart: nodePosition.isStart,
           istarget: nodePosition.isTarget,

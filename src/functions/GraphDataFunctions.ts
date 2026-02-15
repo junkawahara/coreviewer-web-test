@@ -297,7 +297,7 @@ export function parseGraphData(
           nodeElements.push({
             data: {
               id: `${nodeIndex}`,
-              label: `Node${nodeIndex}`,
+              label: `${nodeIndex}`,
               type: 'node',
               isstart: false,
               istarget: false,
@@ -350,7 +350,7 @@ export function parseGraphData(
         nodeElements.push({
           data: {
             id: source,
-            label: `Node${source}`,
+            label: `${source}`,
             type: 'node',
             isstart: false,
             istarget: false,
@@ -365,7 +365,7 @@ export function parseGraphData(
         nodeElements.push({
           data: {
             id: target,
-            label: `Node${target}`,
+            label: `${target}`,
             type: 'node',
             isstart: false,
             istarget: false,

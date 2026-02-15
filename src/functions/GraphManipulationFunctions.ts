@@ -38,7 +38,7 @@ export function addNode(
     newElems.push({
       data: {
         id: `${newId}`,
-        label: `Node${newId}`,
+        label: `${newId}`,
         type: 'node',
         isstart: false,
         istarget: false,
@@ -138,7 +138,7 @@ export function subdivideNode(
     newElements.push({
       data: {
         id: `${newId}`,
-        label: `Node${newId}`,
+        label: `${newId}`,
         type: 'node',
         isstart: false,
         istarget: false,
