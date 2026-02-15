@@ -30,6 +30,7 @@ export const WebApp = () => {
       <Dialog
         open={showResult}
         onClose={() => setShowResult(false)}
+        keepMounted
         maxWidth="lg"
         fullWidth>
         <div css={dialogContentCss}>
@@ -40,6 +41,7 @@ export const WebApp = () => {
       <Dialog
         open={showSettings}
         onClose={() => setShowSettings(false)}
+        keepMounted
         maxWidth="md"
         fullWidth>
         <div css={settingsDialogCss}>
