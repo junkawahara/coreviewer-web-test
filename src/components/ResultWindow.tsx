@@ -192,8 +192,8 @@ export const ResultWindow = () => {
 const container = css`
   display: grid;
   grid-template-columns: 8fr 2fr;
-  height: 91vh;
-  width: 91vw;
+  height: 100%;
+  width: 100%;
 `;
 
 // 結果グラフ表示部のスタイル定義です。

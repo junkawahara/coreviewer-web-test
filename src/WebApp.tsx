@@ -55,7 +55,8 @@ export const WebApp = () => {
 // 結果ダイアログのコンテンツ スタイルです。
 const dialogContentCss = css`
   padding: 16px;
-  min-height: 500px;
+  height: 80vh;
+  overflow: hidden;
 `;
 
 // 設定ダイアログのコンテンツ スタイルです。
